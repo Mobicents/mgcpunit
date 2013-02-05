@@ -7,21 +7,13 @@ import java.util.Iterator;
 import org.apache.log4j.Logger;
 import org.mobicents.arquillian.mediaserver.api.MgcpEventListener;
 import org.mobicents.arquillian.mediaserver.api.MgcpUnitRequest;
-import org.mobicents.arquillian.mediaserver.api.MgcpUnitRequestType;
 import org.mobicents.commtesting.mgcpUnit.requests.PlayAnnouncementRequest;
 import org.mobicents.commtesting.mgcpUnit.utils.EventTypes;
 import org.mobicents.media.server.mgcp.MgcpEvent;
-import org.mobicents.media.server.mgcp.controller.signal.Signal;
 import org.mobicents.media.server.mgcp.message.MgcpMessage;
 import org.mobicents.media.server.mgcp.message.MgcpRequest;
 import org.mobicents.media.server.mgcp.message.MgcpResponse;
 import org.mobicents.media.server.mgcp.message.Parameter;
-import org.mobicents.media.server.mgcp.tx.cmd.CreateConnectionCmd;
-import org.mobicents.media.server.mgcp.tx.cmd.DeleteConnectionCmd;
-import org.mobicents.media.server.mgcp.tx.cmd.EndpointConfigurationCmd;
-import org.mobicents.media.server.mgcp.tx.cmd.ModifyConnectionCmd;
-import org.mobicents.media.server.mgcp.tx.cmd.NotificationRequestCmd;
-import org.mobicents.media.server.mgcp.tx.cmd.NotifyCmd;
 import org.mobicents.media.server.spi.listener.Event;
 import org.mobicents.media.server.utils.Text;
 
@@ -113,8 +105,8 @@ public class MgcpEventListenerImpl implements MgcpEventListener {
 	@Override
 	public boolean checkForSuccessfulResponse(int txId){
 
-		for (Iterator MgcpResponsesIter = responses.iterator(); MgcpResponsesIter.hasNext();) {
-			MgcpResponse resp = (MgcpResponse) MgcpResponsesIter.next();
+		for (Iterator<MgcpResponse> MgcpResponsesIter = responses.iterator(); MgcpResponsesIter.hasNext();) {
+			MgcpResponse resp = MgcpResponsesIter.next();
 			if(resp.getTxID()==txId && resp.getResponseCode()==200)
 				return true;
 		}
