@@ -7,6 +7,7 @@ import java.util.Iterator;
 import org.apache.log4j.Logger;
 import org.mobicents.arquillian.mediaserver.api.MgcpEventListener;
 import org.mobicents.arquillian.mediaserver.api.MgcpUnitRequest;
+import org.mobicents.commtesting.mgcpUnit.requests.NotifyRequest;
 import org.mobicents.commtesting.mgcpUnit.requests.PlayAnnouncementRequest;
 import org.mobicents.commtesting.mgcpUnit.utils.EventTypes;
 import org.mobicents.media.server.mgcp.MgcpEvent;
@@ -28,6 +29,7 @@ public class MgcpEventListenerImpl implements MgcpEventListener {
 	private ArrayList<MgcpRequest> requests = new ArrayList<MgcpRequest>();
 	private ArrayList<MgcpResponse> responses = new ArrayList<MgcpResponse>();
 	private ArrayList<MgcpUnitRequest> playAnnouncementRequests = new ArrayList<MgcpUnitRequest>();
+	private ArrayList<MgcpUnitRequest> notifyRequests = new ArrayList<MgcpUnitRequest>();
 
 	private MgcpRequest lastRequestMessage;
 	private MgcpResponse lastResponseMessage;
@@ -84,7 +86,7 @@ public class MgcpEventListenerImpl implements MgcpEventListener {
 				}
 					
 			} else if (command.equals(EventTypes.REQUEST_NOTIFY)) {
-//				return ntfy;
+				notifyRequests.add(new NotifyRequest(request));
 			}
 
 			break;
@@ -102,17 +104,63 @@ public class MgcpEventListenerImpl implements MgcpEventListener {
 		}
 	}
 	
+	@Override 
+	public Collection<MgcpUnitRequest> getNotifyRequestsReceived(){
+		if (!notifyRequests.isEmpty()){
+			return notifyRequests;
+		} else {
+			return null;
+		}
+	}
+	
 	@Override
 	public boolean checkForSuccessfulResponse(int txId){
 
+		boolean result = false;
+		
 		for (Iterator<MgcpResponse> MgcpResponsesIter = responses.iterator(); MgcpResponsesIter.hasNext();) {
 			MgcpResponse resp = MgcpResponsesIter.next();
 			if(resp.getTxID()==txId && resp.getResponseCode()==200)
-				return true;
+				result = true;
 		}
-		return false;
+		return result;
 	}
 
+	@Override
+	public boolean verifyAll(){
+		boolean result = false;
+		for (MgcpRequest mgcpRequest : requests) {
+			result = checkForSuccessfulResponse(mgcpRequest.getTxID());
+		}
+		return result;
+	}
+	
+	@Override
+	public boolean verifyNotify(){
+		boolean result = false;
+		if (playAnnouncementRequests.size() == notifyRequests.size())
+			result = true;
+		
+		return result;
+	}
+	
+	@Override
+	public void clearRequests(){
+		requests.clear();
+	}
+	
+	@Override
+	public void clearResponses(){
+		responses.clear();
+	}
+	
+	@Override
+	public void clearAll(){
+		clearRequests();
+		clearResponses();
+	}
+	
+	
 	public ArrayList<MgcpRequest> getRequests() {
 		return requests;
 	}

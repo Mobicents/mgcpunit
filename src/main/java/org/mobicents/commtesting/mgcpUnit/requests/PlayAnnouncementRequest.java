@@ -15,6 +15,13 @@ import org.mobicents.media.server.utils.Text;
 
 public class PlayAnnouncementRequest implements MgcpUnitRequest {
 
+//	RQNT 15 mobicents/ivr/1@127.0.0.1:2427 MGCP 1.0
+//	N: restcomm@127.0.0.1:2727
+//	R: AU/oc(N),AU/of(N)
+//	X: 1
+//	S: AU/pa(an=file:///data/devWorkspace/eclipse/localWorkspace/restcomm/restcomm.testsuite/CompatibilityTests/target/mss-tomcat-embedded-6/webapps/restcomm.core-1.0.0.CR1-SNAPSHOT/cache/ttsapi/af4815f86dfed595dbb1911982ea0a945a5117d82b4be0457af3be1b492f2e91.wav it=1)
+
+	
 	private MgcpRequest request;
 	private String file;
 	private String iterations;
