@@ -4,7 +4,7 @@
 
 	<groupId>org.mobicents.commtesting</groupId>
 	<artifactId>mgcpUnit</artifactId>
-	<version>1.0.0-ALPHA2-SNAPSHOT</version>
+	<version>1.0.0-ALPHA1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>Mobicents MgcpUnit</name>
 	<description>Mobicents MgcpUnit</description>
