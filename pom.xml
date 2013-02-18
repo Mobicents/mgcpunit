@@ -46,6 +46,36 @@
 		</snapshotRepository>
 	</distributionManagement>
 
+	<profiles>
+		<profile>
+			<id>release-sign-artifacts</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.4</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>install</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<version.mss.arquillian>1.0.0-ALPHA2</version.mss.arquillian>
@@ -97,13 +127,15 @@
 		<repository>
 			<id>jboss-public-repository</id>
 			<name>JBoss Public Repository</name>
-			<url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+			<url>https://repository.jboss.org/nexus/content/groups/public-jboss/
+			</url>
 		</repository>
 
 		<repository>
 			<id>jboss-snapshots-repository</id>
 			<name>JBoss Snapshots repository</name>
-			<url>https://repository.jboss.org/nexus/content/repositories/snapshots/</url>
+			<url>https://repository.jboss.org/nexus/content/repositories/snapshots/
+			</url>
 		</repository>
 
 		<repository>
