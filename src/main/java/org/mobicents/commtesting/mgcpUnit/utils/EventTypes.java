@@ -3,7 +3,9 @@ package org.mobicents.commtesting.mgcpUnit.utils;
 import org.mobicents.media.server.utils.Text;
 
 /**
- * @author <a href="mailto:gvagenas@gmail.com">gvagenas</a>
+ * Enum for the event types
+ * 
+ * @author <a href="mailto:gvagenas@gmail.com">gvagenas@gmail.com</a>
  */
 
 public class EventTypes {

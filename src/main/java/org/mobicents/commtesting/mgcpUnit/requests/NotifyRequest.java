@@ -7,7 +7,9 @@ import org.mobicents.media.server.mgcp.message.Parameter;
 import org.mobicents.media.server.utils.Text;
 
 /**
- * @author <a href="mailto:gvagenas@gmail.com">gvagenas</a>
+ * Represents a Notify Mgcp request
+ * 
+ * @author <a href="mailto:gvagenas@gmail.com">gvagenas@gmail.com</a>
  */
 
 public class NotifyRequest implements MgcpUnitRequest {

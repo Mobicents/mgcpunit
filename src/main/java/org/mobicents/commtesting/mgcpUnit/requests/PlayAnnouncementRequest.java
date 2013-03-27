@@ -10,7 +10,9 @@ import org.mobicents.media.server.mgcp.message.Parameter;
 import org.mobicents.media.server.utils.Text;
 
 /**
- * @author <a href="mailto:gvagenas@gmail.com">gvagenas</a>
+ * Represents a PlayAnnouncement Mgcp request
+ * 
+ * @author <a href="mailto:gvagenas@gmail.com">gvagenas@gmail.com</a>
  */
 
 public class PlayAnnouncementRequest implements MgcpUnitRequest {
@@ -57,10 +59,20 @@ public class PlayAnnouncementRequest implements MgcpUnitRequest {
 		}
 	}
 	
+	/**
+	 * Returns the announcement file in this request as String
+	 * 
+	 * @return String The announcement file
+	 */
 	public String getAnnouncementFile(){
 		return file;
 	}
 
+	/**
+	 * Returns the number of iterations in this request
+	 * 
+	 * @return String
+	 */
 	public String getIterations(){
 		return iterations;
 	}

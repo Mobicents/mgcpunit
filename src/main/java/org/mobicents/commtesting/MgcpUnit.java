@@ -4,7 +4,11 @@ import org.apache.log4j.Logger;
 import org.mobicents.arquillian.mediaserver.api.MgcpEventListener;
 
 /**
- * @author <a href="mailto:gvagenas@gmail.com">gvagenas</a>
+ * The main MgcpUnit class. 
+ * 
+ * Use an instance of this class in order to get MgcpEventListener and register it with an embedded Mediaserver.
+ * 
+ * @author <a href="mailto:gvagenas@gmail.com">gvagenas@gmail.com</a>
  */
 
 public class MgcpUnit {
@@ -18,6 +22,10 @@ public class MgcpUnit {
 		logger.debug("New MgcpUnit instantiated");
 	}
 	
+	/**
+	 * 
+	 * @return MgcpEventListener
+	 */
 	public MgcpEventListener getMgcpEventListener(){
 		return mgcpEventListener;
 	}

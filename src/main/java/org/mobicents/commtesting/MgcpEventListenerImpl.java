@@ -19,7 +19,12 @@ import org.mobicents.media.server.spi.listener.Event;
 import org.mobicents.media.server.utils.Text;
 
 /**
- * @author <a href="mailto:gvagenas@gmail.com">gvagenas</a>
+ * Implementation of the MgcpEventListener interface.
+ * 
+ * Register an instance of this class with an embedded Mediaserver in order to receive all the Mgcp requests and resources. 
+ * The class classifies the Mgcp events according to the event id and provides helpful methods to manage them. 
+ * 
+ * @author <a href="mailto:gvagenas@gmail.com">gvagenas@gmail.com</a>
  */
 
 public class MgcpEventListenerImpl implements MgcpEventListener {
@@ -34,6 +39,10 @@ public class MgcpEventListenerImpl implements MgcpEventListener {
 	private MgcpRequest lastRequestMessage;
 	private MgcpResponse lastResponseMessage;
 
+	
+	/**
+	 * Process an Mgcp Event.
+	 */
 	@Override
 	public void process(Event event) {
 		MgcpEvent mgcpEvent = (MgcpEvent)event;
@@ -53,6 +62,11 @@ public class MgcpEventListenerImpl implements MgcpEventListener {
 		logger.debug("New dispatched eventId: "+message.getTxID()+" message: "+mgcpEvent.getMessage());
 	}
 
+	/**
+	 * Classifies an Mgcp Event as MgcpRequest or MgcpResponse.
+	 * 
+	 * @param event MgcpEvent
+	 */
 	private void classifyEvent(MgcpEvent event) {
 
 		MgcpRequest request;
@@ -94,7 +108,11 @@ public class MgcpEventListenerImpl implements MgcpEventListener {
 			break;
 		}
 	}
-	
+	/**
+	 * Returns all the PlayAnnouncement Mgcp requests
+	 * 
+	 * @return Collection<MgcpUnitRequest>
+	 */
 	@Override
 	public Collection<MgcpUnitRequest> getPlayAnnoRequestsReceived(){
 		if (!playAnnouncementRequests.isEmpty()){
@@ -104,6 +122,11 @@ public class MgcpEventListenerImpl implements MgcpEventListener {
 		}
 	}
 	
+	/**
+	 * Returns all the Notify Mgcp requests
+	 * 
+	 * @return Collection<MgcpUnitRequest>
+	 */
 	@Override 
 	public Collection<MgcpUnitRequest> getNotifyRequestsReceived(){
 		if (!notifyRequests.isEmpty()){
@@ -113,6 +136,12 @@ public class MgcpEventListenerImpl implements MgcpEventListener {
 		}
 	}
 	
+	/**
+	 * Returns true if for a given TransactionId there was a successful response.
+	 * 
+	 * @param int TransactionId
+	 * @return boolean
+	 */
 	@Override
 	public boolean checkForSuccessfulResponse(int txId){
 
@@ -126,6 +155,11 @@ public class MgcpEventListenerImpl implements MgcpEventListener {
 		return result;
 	}
 
+	/**
+	 * Returns true if for all the Mgcp requests there was a successful response.
+	 * 
+	 * @return boolean
+	 */
 	@Override
 	public boolean verifyAll(){
 		boolean result = false;
@@ -135,6 +169,11 @@ public class MgcpEventListenerImpl implements MgcpEventListener {
 		return result;
 	}
 	
+	/**
+	 * Returns true if for all the Notify Mgcp request there was a successful response
+	 * 
+	 * @return boolean
+	 */
 	@Override
 	public boolean verifyNotify(){
 		boolean result = false;
@@ -144,23 +183,36 @@ public class MgcpEventListenerImpl implements MgcpEventListener {
 		return result;
 	}
 	
+	/**
+	 * Clears the internal storage for Mgcp requests
+	 */
 	@Override
 	public void clearRequests(){
 		requests.clear();
 	}
-	
+
+	/**
+	 * Clears the internal storage for Mgcp responses
+	 */
 	@Override
 	public void clearResponses(){
 		responses.clear();
 	}
 	
+	/**
+	 * Clears the internal storage for all Mgcp request and responses
+	 */
 	@Override
 	public void clearAll(){
 		clearRequests();
 		clearResponses();
 	}
 	
-	
+	/**
+	 * Returns a list of all Mgcp requests
+	 * 
+	 * @return ArrayList<MgcpRequest>
+	 */
 	public ArrayList<MgcpRequest> getRequests() {
 		return requests;
 	}
@@ -179,17 +231,24 @@ public class MgcpEventListenerImpl implements MgcpEventListener {
 		this.responses = responses;
 	}
 
-
+	/**
+	 * Get the last received Mgcp request
+	 * 
+	 * @return MgcpRequest
+	 */
 	public MgcpRequest getLastRequestMessage() {
 		return lastRequestMessage;
 	}
-
 
 	public void setLastRequestMessage(MgcpRequest lastRequestMessage) {
 		this.lastRequestMessage = lastRequestMessage;
 	}
 
-
+	/**
+	 * Get the last received Mgcp response
+	 * 
+	 * @return MgcpResponse
+	 */
 	public MgcpResponse getLastResponseMessage() {
 		return lastResponseMessage;
 	}
