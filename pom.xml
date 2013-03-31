@@ -86,9 +86,9 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<version.mss.arquillian>1.0.0-ALPHA2</version.mss.arquillian>
+		<version.mss.arquillian>1.0.0-CR1</version.mss.arquillian>
 		<!-- Mediaserver -->
-		<version.mediaserver>3.0.0.CR2</version.mediaserver>
+		<version.mediaserver>3.0.0.Final</version.mediaserver>
 	</properties>
 
 	<dependencies>
