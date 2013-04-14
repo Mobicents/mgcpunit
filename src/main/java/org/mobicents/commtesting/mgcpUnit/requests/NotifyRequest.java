@@ -18,16 +18,18 @@ public class NotifyRequest implements MgcpUnitRequest {
 	 * NTFY 147483669 mobicents/ivr/1@127.0.0.1:2427 MGCP 1.0
 	 * N: restcomm@127.0.0.1:2727
 	 * O: AU/oc(rc=100)
-     * X: 1
+	 * X: 1
 	 */
-	
+
 	private MgcpRequest request;
 	private String returnCode;
 	private MgcpUnitRequestType type;
+	private Boolean msgParsed = false;
 
 	public NotifyRequest(MgcpRequest request) {
 		this.setRequest(request);
 		setType(MgcpUnitRequestType.NotifyRequestType);
+		parseRequest();
 	}
 
 	public MgcpRequest getRequest() {
@@ -40,9 +42,12 @@ public class NotifyRequest implements MgcpUnitRequest {
 
 	@Override
 	public void parseRequest(){
-		Parameter auParam = request.getParameter(Parameter.REASON_CODE);
-		Text value = auParam.getValue();
-		setReturnCode(value.toString());
+		if(!msgParsed){
+			Parameter auParam = request.getParameter(Parameter.REASON_CODE);
+			Text value = auParam.getValue();
+			setReturnCode(value.toString());
+			msgParsed = true;
+		}
 	}
 
 
